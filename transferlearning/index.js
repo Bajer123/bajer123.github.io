@@ -90,6 +90,8 @@ const mobilenetDemo = async () => {
 async function predict(imgElement) {
   status('Predicting...');
 
+  predictionsElement.innerHTML = '';
+
   // The first start time includes the time it takes to extract the image
   // from the HTML and preprocess it, in additon to the predict() call.
   const startTime1 = performance.now();
