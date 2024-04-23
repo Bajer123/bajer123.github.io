@@ -1,17 +1,19 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     background-color: #FFC2C2;
-    overflow-x: hidden; /* Prevents horizontal scroll in case of overflow */
+    overflow-x: hidden;
+    /* Prevents horizontal scroll in case of overflow */
 }
 
 .welcome-box {
     background: #952B2B;
     color: #FFC2C2;
     text-align: center;
-    padding: 20px 0; 
+    padding: 20px 0;
     box-sizing: border-box;
     width: 100%;
 }
@@ -19,26 +21,94 @@ html, body {
 .welcome-box h1 {
     margin: 0;
     padding: 0;
-    font-size: 32px; /* Adjust font-size as necessary */
+    font-size: 40px;
+    /* Adjust font-size as necessary */
     font-family: 'Times New Roman', serif;
 }
 
 
 .decription-head {
-    font-size: 16px; /* Adjust font-size as necessary */
-    color: #952B2B; /* Assuming white text color */
-    padding: 0px 15px; /* Padding above and below the text */
+    font-size: 20px;
+    /* Adjust font-size as necessary */
+    color: #952B2B;
+    /* Assuming white text color */
+    padding: 0px 15px;
+    /* Padding above and below the text */
     margin: 20px 0 0px 0;
-    text-align: left; /* Centers the text */
+    text-align: left;
+    /* Centers the text */
     font-family: 'Times New Roman', serif;
     text-decoration: underline;
 }
 
 .decription2 {
-    font-size: 13px; /* Adjust font-size as necessary */
-    color: #952B2B; /* White color for the paragraph text */
-    margin: 0; /* Resets any default margins */
-    padding: 0px 15px; /* Padding around the text */
-    text-align: left; /* Centers the text */
+    font-size: 16px;
+    /* Adjust font-size as necessary */
+    color: #952B2B;
+    /* White color for the paragraph text */
+    margin: 0;
+    /* Resets any default margins */
+    padding: 0px 15px;
+    /* Padding around the text */
+    text-align: left;
+    /* Centers the text */
     font-family: 'Times New Roman', serif;
+}
+
+
+/*Knap css */
+
+.button-shape {
+    background: #222;
+    border-bottom: 2px solid #555;
+    border-top: 2px solid #555;
+    margin-top: 30px;
+    padding: 40px 0;
+}
+
+.button-diamond-shape {
+    background: #fff;
+    height: 60px;
+    text-align: center;
+    transform: rotate(45deg);
+    width: 100px;
+}
+
+.navigation-container {
+    display: inline-grid;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding: 1cap;
+    grid-template-columns: repeat(2, 1fr); /* Creates two columns */
+    grid-gap: 40px; /* This is the space between the grid items */
+    justify-content: center; 
+    align-items: center; 
+}
+
+.button-container {
+
+    width: 130px;
+    height: 130px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.diamond-button {
+    all: unset;
+    font-size: 18px;
+    background: #952B2B;
+    color: #FFC2C2;
+    width: calc(sqrt(2) * 50%);
+    height: calc(sqrt(2) * 50%);
+    transform: rotateZ(45deg);
+    justify-content:center;
+    align-items:center; 
+    border-radius: 10px;
+    text-align: center;
+}
+
+.button-text {
+    transform: rotateZ(-45deg)
 }

@@ -21,7 +21,6 @@ limitations under the License.
   <title>WineMe-Home</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="tfjs-examples.css" />
   <link rel="stylesheet" href="Home.css" />
 </head>
 
@@ -38,21 +37,34 @@ limitations under the License.
       Add your wines and a dish and get a recommendation to the perfect pairing
     </p>
 
-  </section>
-  <button id="navigateButtonWineRack">Wine Rack</button>
-  </section>
+    <section class="navigation-container">
+      <div class="button-container">
+        <button  id="navigateButtonWineRack" class="diamond-button">
+          <div class="button-text">Wine Rack</div>
+        </button>
+      </div>
 
-  </section>
-  <button id="navigateButtonAddWine">Add Wine</button>
-  </section>
+      <div class="button-container">
+        <button id="navigateButtonAddWine" class="diamond-button">
+          <div class="button-text">Add Wine</div>
+        </button>
+      </div>
 
-  </section>
-  <button id="navigateButtonAddDish">Add Dish</button>
-  </section>
 
-  </section>
-  <button id="navigateButtonAddDish">Add Dish(photo)</button>
-  </section>
+      <div class="button-container">
+        <button id="navigateButtonAddDish" class="diamond-button">
+          <div class="button-text">Add Dish</div>
+        </button>
+      </div>
+
+
+      <div class="button-container">
+        <button id="navigateButtonAddDishPhoto" class="diamond-button">
+          <div class="button-text">Add Dish</div>
+        </button>
+      </div>
+
+    </section>
 
   <script src="index.js" type="module"></script>
 </body>
