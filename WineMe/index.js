@@ -15,6 +15,10 @@
  * =============================================================================
  */
 
+let redWines = ["Merlot", "Sangiovese", "Zinfandel"]; 
+let whiteWines = ["Chardonnay", "Riesling", "Muscat"];
+let roseWines = ["Cabernet", "Syrah", "Provence"];
+
 function allowDrop(ev) {
   ev.preventDefault();
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="AddWine.css" />
     <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Wine</title>
@@ -17,36 +17,41 @@
     </div>
     <section class="navigation-container">
         <div class="button-container">
-          <div id="navigateButtonWineRack" class="diamond-button">
-            <span class="material-symbols-outlined">
-                <span class="button-label">Add</span>
-                <span class="material-icons">wine_bar</span>
-            </span>
-        </div>
+            <div id="navigateButtonWineRack" class="diamond-button">
+                <span class="material-symbols-outlined">
+                    <span class="button-label">Add</span>
+                    <span class="material-icons">wine_bar</span>
+                </span>
+            </div>
         </div>
     </section>
 
 
     <p class='decription-head'>Add your wine here</p>
 
-  
 
 
-    <input type="text" id="wineInput" placeholder="Type here">
-    <button id="addButton">Add</button>
+
+    <div id="inputButtonContainer">
+        <input type="text" id="wineInput" placeholder="Type here">
+        <button id="addButton">Add</button>
+    </div>
+    
 
     <div id="displayBox"></div>
 
-
-    <div class="button-container">
-        <button id="navigateButtonHome" class="diamond-button">
-          <span class="material-symbols-outlined">
-            <span class="button-label-home">
-                arrow_back
+    <div class="home-button">
+        <div class="button-container">
+            <button id="navigateButtonHome" class="diamond-button">
+                <span class="material-symbols-outlined">
+                    <span class="button-label-home">
+                        arrow_back
+                    </span>
                 </span>
-          </span>
-      </button>
-      </div>
+            </button>
+        </div>
+    </div>
+
     <script src="AddWine.js" type="module"></script>
 </body>
 
