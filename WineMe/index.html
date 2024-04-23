@@ -22,88 +22,37 @@ limitations under the License.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="tfjs-examples.css" />
+  <link rel="stylesheet" href="Home.css" />
 </head>
-
-<style>
-  .pred-container {
-    margin-bottom: 20px;
-  }
-
-  .pred-container > div {
-    display: inline-block;
-    margin-right: 20px;
-    vertical-align: top;
-  }
-
-  .row {
-    display: table-row;
-  }
-  .cell {
-    display: table-cell;
-    padding-right: 20px;
-  }
-
-  #file-container {
-    margin-bottom: 20px;
-  }
-  
-  #div1 {
-    width: 350px;
-    height: 70px;
-    padding: 10px;
-    border: 1px solid #aaaaaa;
-  }
-</style>
 
 <!-- TensorFlow.js script -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
 
 <body>
-  <div class="tfjs-example-container">
-    <section class='title-area'>
-      <h1>WineME.HOME</h1>
-    </section>
-
-    <section>
-      <p class='section-head'>Description</p>
-      <p>
-        Find your perfect wine pairing!
-	  </p>
-  </blockquote>
-    </section>
-
-  </section>
-    <button id="navigateButtonWineRack">Wine Rack</button>
-  </section>
-
-  </section>
-    <button id="navigateButtonAddWine">Add Wine</button>
-  </section>
-
-  </section>
-    <button id="navigateButtonAddDish">Add Dish</button>
-  </section>
-
-
-    <section>
-      <p class='section-head'>Status</p>
-      <div id="status"></div>
-    </section>
-
-    <section>
-      <p class='section-head'>Model Output</p>
-
-      <div id="file-container" style="display: none">
-        Upload an image: <input type="file" id="files" name="files[]" multiple />
-      </div>
-      <div id="div1">... or drag image file here to upload</div>
-      <br>
-      <div id="predictions"></div>
-
-    </section>
-
-    <script src="index.js" type="module"></script>
+  <div class="welcome-box">
+    <h1>WineMe</h1>
   </div>
+
+    <p class='decription-head'>Welcome to WineMe</p>
+    <p class='decription2'>
+      Add your wines and a dish and get a recommendation to the perfect pairing
+    </p>
+
+  </section>
+  <button id="navigateButtonWineRack">Wine Rack</button>
+  </section>
+
+  </section>
+  <button id="navigateButtonAddWine">Add Wine</button>
+  </section>
+
+  </section>
+  <button id="navigateButtonAddDish">Add Dish</button>
+  </section>
+
+  </section>
+  <button id="navigateButtonAddDish">Add Dish(photo)</button>
+  </section>
+
+  <script src="index.js" type="module"></script>
 </body>
-
-

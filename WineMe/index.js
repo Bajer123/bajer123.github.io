@@ -101,7 +101,7 @@ if (WineRackButton) {
 
 const AddWineButton = document.getElementById('navigateButtonAddWine');
 if (AddWineButton) {
-  WineRackButton.addEventListener('click', function() {
+  AddWineButton.addEventListener('click', function() {
     window.location.href = 'AddWine.html'; 
   });
 }
