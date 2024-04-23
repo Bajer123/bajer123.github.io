@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="AddWine.css" />
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Page</title>
+    <title>Add Wine</title>
 </head>
+
 <body>
-    <h1>Welcome to the Next Page!</h1>
+    <div class="welcome-box">
+        <h1>WineMe</h1>
+    </div>
+    <section class="navigation-container">
+        <div class="button-container">
+          <div id="navigateButtonWineRack" class="diamond-button">
+            <span class="material-symbols-outlined">
+                <span class="button-label">Add</span>
+                <span class="material-icons">wine_bar</span>
+            </span>
+        </div>
+        </div>
+    </section>
+
+
+    <p class='decription-head'>Add your wine here</p>
+
+  
+
+
+    <input type="text" id="wineInput" placeholder="Type here">
+    <button id="addButton">Add</button>
+
+    <div id="displayBox"></div>
+
+
+    <div class="button-container">
+        <button id="navigateButtonHome" class="diamond-button">
+          <span class="material-symbols-outlined">
+            <span class="button-label-home">
+                arrow_back
+                </span>
+          </span>
+      </button>
+      </div>
+    <script src="AddWine.js" type="module"></script>
 </body>
-
-</section>
-    <button id="navigateButtonHome">Home</button>
-    <script src="index.js" type="module"></script>
-</section>
-
 
 </html>
