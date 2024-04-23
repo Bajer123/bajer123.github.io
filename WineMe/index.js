@@ -83,6 +83,36 @@ const mobilenetDemo = async () => {
   document.getElementById('file-container').style.display = '';
 };
 
+
+// Listener for navigating back to Home page
+const homeButton = document.getElementById('navigateButtonHome');
+if (homeButton) {
+  homeButton.addEventListener('click', function() {
+    window.location.href = 'index.html'; 
+  });
+}
+
+const WineRackButton = document.getElementById('navigateButtonWineRack');
+if (WineRackButton) {
+  WineRackButton.addEventListener('click', function() {
+    window.location.href = 'WineRack.html'; 
+  });
+}
+
+const AddWineButton = document.getElementById('navigateButtonAddWine');
+if (AddWineButton) {
+  WineRackButton.addEventListener('click', function() {
+    window.location.href = 'AddWine.html'; 
+  });
+}
+
+const addButton = document.getElementById('navigateButtonAddDish');
+if (addButton) {
+  addButton.addEventListener('click', function() {
+    window.location.href = 'AddDish.html'; 
+  });
+}
+
 /**
  * Given an image element, makes a prediction through mobilenet returning the
  * probabilities of the top K classes.
