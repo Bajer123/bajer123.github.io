@@ -23,7 +23,6 @@ body {
     margin: 0;
     padding: 0;
     font-size: 40px;
-    /* Adjust font-size as necessary */
     font-family: 'Times New Roman', serif;
 }
 
@@ -44,7 +43,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Position relative for absolute positioning of children */
+    position: relative; 
     overflow: hidden; 
     background: #952B2B;
     color: #FFC2C2;
@@ -60,7 +59,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg); /* Centralize and correct rotation */
+    transform: translate(-50%, -50%) rotate(-45deg); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,11 +67,11 @@ body {
 }
 
 .button-label {
-    font-size: 20px; /* Adjust font size as needed */
+    font-size: 20px; 
 }
 
 .material-icons {
-    font-size: 20px; /* Typically, icons might be slightly larger */
+    font-size: 20px;
 }
 
 
@@ -89,29 +88,29 @@ body {
 
 /*input fiels */
 #wineInput {
-    border: 5px solid #952B2B; /* Adjust color to match the input border in the image */
-    padding: 10px; /* Adjust padding to match the image */
-    border-radius: 25px; /* Large border radius for rounded corners */
-    height: 40px; /* Adjust height to match the image */
-    width: 100%; /* Adjust width to make space for the button */
-    margin-right: -50px;/* Full width minus button width, adjust as necessary */
-    box-sizing: border-box; /* Ensures padding is included in total width/height */
-    outline: none; /* Removes the outline to match the image style */
+    border: 5px solid #952B2B; 
+    padding: 10px; 
+    border-radius: 25px; 
+    height: 40px; 
+    width: 100%; 
+    margin-right: -50px;
+    box-sizing: border-box; 
+    outline: none; 
 }
 
 #addButton {
-    position: absolute; /* Absolute position the add button */
-    right: 10px; /* Position the button 5px from the right edge of the container */
+    position: absolute; 
+    right: 10px; 
     top: 7px;
-    display: flex; /* Enables flexbox */
+    display: flex; 
     justify-content: center;
-    border: 2px solid #952B2B; /* Adjust color to match the button border in the image */
-    background-color: #952B2B; /* Button background color */
-    color: #FFC2C2; /* Text color within the button */
-    padding: 5px 10px; /* Adjust padding to match the image */
-    border-radius: 25px; /* Same as above, for the right side of the button */
-    height: 25px; /* Height including border to align with the input field */
-    cursor: pointer; /* Changes cursor to pointer on hover */
+    border: 2px solid #952B2B; 
+    background-color: #952B2B; 
+    color: #FFC2C2; 
+    padding: 5px 10px; 
+    border-radius: 25px; 
+    height: 25px; 
+    cursor: pointer; 
     align-items: center;
     font-family: 'Times New Roman', serif;
     font-size: 14px;
@@ -120,8 +119,8 @@ body {
 
 /* Styles for the container that holds both the input and the button */
 #inputButtonContainer {
-    position: relative; /* Set the input button container to position relative */
-    max-width: 90%; /* Adjust to the desired width of the input field */
+    position: relative; 
+    max-width: 90%; 
     margin: 0 auto;
 }
 
@@ -130,8 +129,8 @@ body {
     border: 1px solid #952B2B;
     margin-top: 10px;
     padding: 5px;
-    position: relative; /* Ensures that absolute positioning of children is relative to this container */
-    display: flex; /* Allows for inline positioning of elements like the delete button */
+    position: relative; 
+    display: flex; 
     align-items: center;
     font-family: 'Times New Roman', serif;
     font-size: 16px;
@@ -147,21 +146,21 @@ body {
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 60px; /* Distance from the bottom of the page */
-    left: 50%; /* Center align the button horizontally */
-    transform: translateX(-50%); /* Offset the button to truly center it */
-    width: 100%; /* Optional, depending on exact needs */
+    bottom: 60px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 100%; 
 }
 
 .delete-button {
     all: unset;
-    position: absolute; /* Position absolutely to place specifically within the parent */
-    right: 5px; /* Align to the far left of the wine-box */
+    position: absolute; 
+    right: 5px; 
     background-color: #952B2B;
     transform: rotate(45deg);
-    color: #952B2B; /* Ensuring text is visible on dark background */
-    cursor: pointer; /* Makes it clear the button is clickable */
-    padding: 0px 0px; /* Add padding for better touch targets */
+    color: #952B2B; 
+    cursor: pointer; 
+    padding: 0px 0px; 
     margin-right: 10px;
     border-radius: 10px;
 }
