@@ -10,23 +10,6 @@
 
 </head>
 
-<style>
-
-  .row {
-    display: table-row;
-  }
-
-  .cell {
-    display: table-cell;
-    padding-right: 20px;
-  }
-
-  #file-container {
-    margin-bottom: 20px;
-  }
-
-
-</style>
 
 <!-- TensorFlow.js script -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
@@ -69,9 +52,17 @@
       <div id="status"></div>
     </section>
 
-    </section>
-    <button id="navigateButtonHome">Home</button>
-    </section>
+    <div class="home-button">
+      <div class="button-container">
+          <button id="navigateButtonHome" class="diamond-button">
+              <span class="material-symbols-outlined">
+                  <span class="button-label-home">
+                      arrow_back
+                  </span>
+              </span>
+          </button>
+      </div>
+  </div>
 
     <script src="index.js" type="module"></script>
   </div>

@@ -142,10 +142,46 @@ input[type="file"] {
 }
 
 #type,
-#certainty {
+.certainty {
     color: #952B2B;
     font-weight: bold;
     margin: 5px 0;
     text-align: left;
     border-radius: 10%;
+}
+
+/*Types of wines */
+
+#type {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.corresponding-wines {
+    margin-left: 40px;
+}
+
+/*Certainty */
+
+.certainty {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.percentage {
+    margin-left:40px;
+}
+
+
+/* Home button */
+.home-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
 }

@@ -15,9 +15,33 @@
  * =============================================================================
  */
 
-let redWines = ["Merlot", "Sangiovese", "Zinfandel"]; 
+let redWines = ["Merlot", "Sangiovese", "Zinfandel"];
 let whiteWines = ["Chardonnay", "Riesling", "Muscat"];
 let roseWines = ["Cabernet", "Syrah", "Provence"];
+let red = [];
+let white = [];
+let rose = [];
+
+function loadWineRack() {
+
+  red = [];
+  white = [];
+  rose = [];
+  // Retrieve wines from local storage
+  let storedWines = JSON.parse(localStorage.getItem('wines')) || [];
+
+  // Match wines against red, white, and rose lists
+  storedWines.forEach(wine => {
+    if (redWines.includes(wine)) {
+      red.push(wine);
+    } else if (whiteWines.includes(wine)) {
+      white.push(wine);
+    } else if (roseWines.includes(wine)) {
+      rose.push(wine);
+    }
+  });
+
+}
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -28,17 +52,17 @@ function drop(ev) {
   console.log(ev);
   //var data = ev.dataTransfer.getData("text");
   //ev.target.appendChild(document.getElementById(data));
-  
+
   var reader = new FileReader();
   reader.onload = e => {
-      // Fill the image & call predict.
-      let img = document.createElement('img');
-      img.src = e.target.result;
-      img.width = IMAGE_SIZE;
-      img.height = IMAGE_SIZE;
-      img.onload = () => predict(img);
-    };
-  
+    // Fill the image & call predict.
+    let img = document.createElement('img');
+    img.src = e.target.result;
+    img.width = IMAGE_SIZE;
+    img.height = IMAGE_SIZE;
+    img.onload = () => predict(img);
+  };
+
   //reader.onload = function(e){
   //  var dropdata = new Uint8Array(e.target.result);
   //};
@@ -49,11 +73,11 @@ function drop(ev) {
 
 //import * as tf from '@tensorflow/tfjs';
 
-import {IMAGENET_CLASSES} from './my_classes.js';
+import { IMAGENET_CLASSES } from './my_classes.js';
 
 const MOBILENET_MODEL_PATH = './mobilenet/model.json';
-    // tslint:disable-next-line:max-line-length
-    //'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
+// tslint:disable-next-line:max-line-length
+//'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
 
 const IMAGE_SIZE = 224;
 const TOPK_PREDICTIONS = 3;
@@ -91,29 +115,29 @@ const mobilenetDemo = async () => {
 // Listener for navigating back to Home page
 const homeButton = document.getElementById('navigateButtonHome');
 if (homeButton) {
-  homeButton.addEventListener('click', function() {
-    window.location.href = 'index.html'; 
+  homeButton.addEventListener('click', function () {
+    window.location.href = 'index.html';
   });
 }
 
 const WineRackButton = document.getElementById('navigateButtonWineRack');
 if (WineRackButton) {
-  WineRackButton.addEventListener('click', function() {
-    window.location.href = 'WineRack.html'; 
+  WineRackButton.addEventListener('click', function () {
+    window.location.href = 'WineRack.html';
   });
 }
 
 const AddWineButton = document.getElementById('navigateButtonAddWine');
 if (AddWineButton) {
-  AddWineButton.addEventListener('click', function() {
-    window.location.href = 'AddWine.html'; 
+  AddWineButton.addEventListener('click', function () {
+    window.location.href = 'AddWine.html';
   });
 }
 
 const addButton = document.getElementById('navigateButtonAddDish');
 if (addButton) {
-  addButton.addEventListener('click', function() {
-    window.location.href = 'AddDish.html'; 
+  addButton.addEventListener('click', function () {
+    window.location.href = 'AddDish.html';
   });
 }
 
@@ -153,7 +177,7 @@ async function predict(imgElement) {
   const totalTime1 = performance.now() - startTime1;
   const totalTime2 = performance.now() - startTime2;
   status(`Done in ${Math.floor(totalTime1)} ms ` +
-      `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
+    `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
 
   // Show the classes in the DOM.
   showResults(imgElement, classes);
@@ -170,7 +194,7 @@ export async function getTopKClasses(logits, topK) {
 
   const valuesAndIndices = [];
   for (let i = 0; i < values.length; i++) {
-    valuesAndIndices.push({value: values[i], index: i});
+    valuesAndIndices.push({ value: values[i], index: i });
   }
   valuesAndIndices.sort((a, b) => {
     return b.value - a.value;
@@ -197,14 +221,22 @@ export async function getTopKClasses(logits, topK) {
 //
 
 function showResults(imgElement, classes) {
+  loadWineRack();
+  // Print the lists of red, white, and rose wines
+  console.log("Red Wines:", red.join(', '));
+  console.log("White Wines:", white.join(', '));
+  console.log("Rose Wines:", rose.join(', '));
+
   const predictionContainer = document.createElement('div');
   predictionContainer.className = 'pred-container';
 
+  //Show uploaded image
   const imgContainer = document.createElement('div');
   imgContainer.id = 'picture';
   imgContainer.appendChild(imgElement);
   predictionContainer.appendChild(imgContainer);
 
+  //Recommendation text before box
   const predictionText = document.createElement('p')
   predictionText.className = 'predText'
   predictionText.innerText = 'Recommendation'
@@ -218,27 +250,70 @@ function showResults(imgElement, classes) {
     }
   }
 
-  // Display the class with the highest probability and its probability
+  //Make recommendation box
   const maxProbRow = document.createElement('div');
   maxProbRow.id = 'recomendation';
   maxProbRow.className = 'row';
 
-  const maxProbClassElement = document.createElement('div');
-  maxProbClassElement.className = 'cell'
-  maxProbClassElement.id = 'type';
-  maxProbClassElement.innerText = maxProbabilityClass.className;
-  maxProbRow.appendChild(maxProbClassElement);
+  // Type of wine based on probability 
+  const maxProbClassContainer = document.createElement('div');
+  maxProbClassContainer.className = 'cell';
+  maxProbClassContainer.id = 'type';
 
+  const maxProbClassElement = document.createElement('div');
+  maxProbClassElement.innerText = maxProbabilityClass.className;
+  maxProbClassContainer.appendChild(maxProbClassElement);
+
+
+  // Add corresponding wines based on the class
+  let correspondingWines;
+  if (maxProbabilityClass.className === 'Red Wine') {
+    correspondingWines = red.slice(0, 2).join(', ');
+    if (correspondingWines === '' && white.length > 0) {
+      correspondingWines = white.slice(0, 2).join(', ');
+    }
+  } else if (maxProbabilityClass.className === 'White Wine') {
+    correspondingWines = white.slice(0, 2).join(', ');
+    if (correspondingWines === '' && red.length > 0) {
+      correspondingWines = red.slice(0, 2).join(', ');
+    }
+  } else if (maxProbabilityClass.className === 'Rose') {
+    correspondingWines = rose.slice(0, 2).join(', ');
+    if (correspondingWines === '' && white.length > 0) {
+      correspondingWines = white.slice(0, 2).join(', ');
+    }
+  }
+
+
+
+  // Create and append element for corresponding wines
+  const winesElement = document.createElement('div');
+  winesElement.className = 'corresponding-wines';
+  winesElement.innerText = correspondingWines;
+
+  maxProbClassContainer.appendChild(winesElement);
+
+  maxProbRow.appendChild(maxProbClassContainer);
+
+  //Certainty
   const maxProbElement = document.createElement('div');
-  maxProbElement.className = 'cell';
-  maxProbElement.id = 'certainty';
-  maxProbElement.innerText = "Certainty: " +  (maxProbabilityClass.probability * 100).toFixed(2) + "%";
+  maxProbElement.className = 'certainty';
+  // Certainty text
+  const certaintyText = document.createElement('div');
+  certaintyText.innerText = 'Certainty ';
+  maxProbElement.appendChild(certaintyText);
+
+  // Probability percentage
+  const probabilityPercentage = document.createElement('div');
+  probabilityPercentage.className = 'percentage';
+  probabilityPercentage.innerText = (maxProbabilityClass.probability * 100).toFixed(2) + "%";
+  maxProbElement.appendChild(probabilityPercentage);
   maxProbRow.appendChild(maxProbElement);
 
   predictionContainer.appendChild(maxProbRow);
 
   predictionsElement.insertBefore(
-      predictionContainer, predictionsElement.firstChild);
+    predictionContainer, predictionsElement.firstChild);
 }
 
 
