@@ -4,7 +4,10 @@
   <title>WineMe-AddDish</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="tfjs-examples.css" />
+  <link rel="stylesheet" href="AddDish.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 </head>
 
 <style>
@@ -12,7 +15,7 @@
     margin-bottom: 20px;
   }
 
-  .pred-container > div {
+  .pred-container>div {
     display: inline-block;
     margin-right: 20px;
     vertical-align: top;
@@ -21,6 +24,7 @@
   .row {
     display: table-row;
   }
+
   .cell {
     display: table-cell;
     padding-right: 20px;
@@ -29,7 +33,7 @@
   #file-container {
     margin-bottom: 20px;
   }
-  
+
   #div1 {
     width: 350px;
     height: 70px;
@@ -43,33 +47,41 @@
 
 <body>
   <div class="tfjs-example-container">
-    <section class='title-area'>
-      <h1>WineME.1.0</h1>
+    <div class="welcome-box">
+      <h1>WineMe</h1>
+    </div>
+    <section class="navigation-container">
+      <div class="button-container">
+        <div id="navigateButtonWineRack" class="diamond-button">
+          <span class="material-symbols-outlined">
+            <span class="button-label"> photo_camera</span>
+          </span>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <p class='section-head'>Description</p>
-      <p>
-        Find your perfect wine pairing!
-	  </p>
-  </blockquote>
-    </section>
+
+    <p class='decription-head'>Add your wine here</p>
 
     <section>
-      <p class='section-head'>Status</p>
-      <div id="status"></div>
-    </section>
-
-    <section>
-      <p class='section-head'>Model Output</p>
 
       <div id="file-container" style="display: none">
-        Upload an image: <input type="file" id="files" name="files[]" multiple />
+        <input type="file" id="files" name="files[]" multiple />
       </div>
       <div id="div1">... or drag image file here to upload</div>
       <br>
       <div id="predictions"></div>
 
+    </section>
+
+    <label for="file-upload" class="custom-file-upload">
+      Custom Upload
+    </label>
+    <input id="file-upload" type="file" />
+
+    <section>
+      <p class='section-head'>Status</p>
+      <div id="status"></div>
     </section>
 
     </section>
