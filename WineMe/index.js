@@ -201,6 +201,7 @@ function showResults(imgElement, classes) {
   predictionContainer.className = 'pred-container';
 
   const imgContainer = document.createElement('div');
+  imgContainer.id = 'picture';
   imgContainer.appendChild(imgElement);
   predictionContainer.appendChild(imgContainer);
 
@@ -258,7 +259,7 @@ const status = msg => demoStatusElement.innerText = msg;
 
 const predictionsElement = document.getElementById('predictions');
 
-const dropfieldElement = document.getElementById('div1');
+const dropfieldElement = document.getElementById('foodImage');
 dropfieldElement.addEventListener("dragenter", allowDrop, false);
 dropfieldElement.addEventListener("dragover", allowDrop, false);
 dropfieldElement.addEventListener("drop", drop, false);

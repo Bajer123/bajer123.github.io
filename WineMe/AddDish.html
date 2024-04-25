@@ -11,15 +11,6 @@
 </head>
 
 <style>
-  .pred-container {
-    margin-bottom: 20px;
-  }
-
-  .pred-container>div {
-    display: inline-block;
-    margin-right: 20px;
-    vertical-align: top;
-  }
 
   .row {
     display: table-row;
@@ -34,12 +25,7 @@
     margin-bottom: 20px;
   }
 
-  #div1 {
-    width: 350px;
-    height: 70px;
-    padding: 10px;
-    border: 1px solid #aaaaaa;
-  }
+
 </style>
 
 <!-- TensorFlow.js script -->
@@ -61,23 +47,22 @@
     </section>
 
 
-    <p class='decription-head'>Add your wine here</p>
+    <p class='decription-head'>What are you eating tonight?</p>
+
+
+
 
     <section>
-
-      <div id="file-container" style="display: none">
+      <div>
+        <label for="files" id="file-container">
+          Upload Image
+        </label>
         <input type="file" id="files" name="files[]" multiple />
       </div>
-      <div id="div1">... or drag image file here to upload</div>
+      <div id="foodImage"></div>
       <br>
       <div id="predictions"></div>
-
     </section>
-
-    <label for="file-upload" class="custom-file-upload">
-      Custom Upload
-    </label>
-    <input id="file-upload" type="file" />
 
     <section>
       <p class='section-head'>Status</p>

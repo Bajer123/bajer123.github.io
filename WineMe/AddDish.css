@@ -79,22 +79,38 @@ body {
 
 /* text under icon */
 .decription-head {
-    font-size: 14px;
+    font-size: 16px;
     color: #952B2B;
-    padding: 0px 15px;
-    margin: 0px 0px 10px 30px;
+    padding: 0px 5px;
     text-align: left;
     font-family: 'Times New Roman', serif;
-    text-decoration: underline;
+    border-bottom: 1px solid #952B2B;
+    margin: 0px 30px 10px 30px;
 }
 
-/*input[type="file"] {
+/*Upload button*/
+input[type="file"] {
     display: none;
 }
-*/
-.custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
+
+#file-container {
+    display: flex;
+    justify-content: center;
+    background: #952B2B;
+    color: #FFC2C2;
     padding: 6px 12px;
     cursor: pointer;
+    width: 40%; /* Set the width to 40% */
+    margin: 0 auto;
+    border-radius: 10px;
+    font-family: 'Times New Roman', serif;
 }
+
+
+/* Food image */
+#picture {
+    display: flex;
+    justify-content: center;
+}
+
+
