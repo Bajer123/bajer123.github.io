@@ -193,7 +193,7 @@ export async function getTopKClasses(logits, topK) {
 }
 
 //
-// UI
+// UI SHOW Certainly 
 //
 
 function showResults(imgElement, classes) {
@@ -205,28 +205,42 @@ function showResults(imgElement, classes) {
   imgContainer.appendChild(imgElement);
   predictionContainer.appendChild(imgContainer);
 
-  const probsContainer = document.createElement('div');
-  for (let i = 0; i < classes.length; i++) {
-    const row = document.createElement('div');
-    row.className = 'row';
+  const predictionText = document.createElement('p')
+  predictionText.className = 'predText'
+  predictionText.innerText = 'Recommendation'
+  predictionContainer.appendChild(predictionText)
 
-    const classElement = document.createElement('div');
-    classElement.className = 'cell';
-    classElement.innerText = classes[i].className;
-    row.appendChild(classElement);
-
-    const probsElement = document.createElement('div');
-    probsElement.className = 'cell';
-    probsElement.innerText = classes[i].probability.toFixed(3);
-    row.appendChild(probsElement);
-
-    probsContainer.appendChild(row);
+  // Find the class with the highest probability
+  let maxProbabilityClass = classes[0];
+  for (let i = 1; i < classes.length; i++) {
+    if (classes[i].probability > maxProbabilityClass.probability) {
+      maxProbabilityClass = classes[i];
+    }
   }
-  predictionContainer.appendChild(probsContainer);
+
+  // Display the class with the highest probability and its probability
+  const maxProbRow = document.createElement('div');
+  maxProbRow.id = 'recomendation';
+  maxProbRow.className = 'row';
+
+  const maxProbClassElement = document.createElement('div');
+  maxProbClassElement.className = 'cell'
+  maxProbClassElement.id = 'type';
+  maxProbClassElement.innerText = maxProbabilityClass.className;
+  maxProbRow.appendChild(maxProbClassElement);
+
+  const maxProbElement = document.createElement('div');
+  maxProbElement.className = 'cell';
+  maxProbElement.id = 'certainty';
+  maxProbElement.innerText = "Certainty: " +  (maxProbabilityClass.probability * 100).toFixed(2) + "%";
+  maxProbRow.appendChild(maxProbElement);
+
+  predictionContainer.appendChild(maxProbRow);
 
   predictionsElement.insertBefore(
       predictionContainer, predictionsElement.firstChild);
 }
+
 
 const filesElement = document.getElementById('files');
 filesElement.addEventListener('change', evt => {

@@ -84,7 +84,7 @@ body {
     padding: 0px 5px;
     text-align: left;
     font-family: 'Times New Roman', serif;
-    border-bottom: 1px solid #952B2B;
+    border-bottom: 2px solid #952B2B;
     margin: 0px 30px 10px 30px;
 }
 
@@ -100,7 +100,8 @@ input[type="file"] {
     color: #FFC2C2;
     padding: 6px 12px;
     cursor: pointer;
-    width: 40%; /* Set the width to 40% */
+    width: 40%;
+    /* Set the width to 40% */
     margin: 0 auto;
     border-radius: 10px;
     font-family: 'Times New Roman', serif;
@@ -111,6 +112,40 @@ input[type="file"] {
 #picture {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+}
+
+/*Text above recommendation box */
+.predText {
+    font-size: 16px;
+    color: #952B2B;
+    padding: 0px 5px;
+    text-align: left;
+    font-family: 'Times New Roman', serif;
+    border-bottom: 2px solid #952B2B;
+    margin: 0px 30px 10px 30px;
 }
 
 
+/* Recomendation box */
+
+#recomendation {
+    background-color: #FFC2C2;
+    border: 5px solid #952B2B;
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10%;
+}
+
+#type,
+#certainty {
+    color: #952B2B;
+    font-weight: bold;
+    margin: 5px 0;
+    text-align: left;
+    border-radius: 10%;
+}
