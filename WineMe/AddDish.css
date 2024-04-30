@@ -178,12 +178,6 @@ input[type="file"] {
 
 /* Text */
 
-.navigation-container {
-    display: inline-block;
-    color: aqua;
-}
-
-
 .informationDiv {
     display: inline-flex;
     flex-wrap: wrap;
@@ -193,8 +187,8 @@ input[type="file"] {
     align-items: center;
 
 }
-/* button */
 
+/* button */
 
 #navigateInfo {
     width: 30%;
