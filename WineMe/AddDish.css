@@ -141,15 +141,6 @@ input[type="file"] {
     border-radius: 10%;
 }
 
-#type {
-    color: #952B2B;
-    font-weight: bold;
-    font-size: 12px;
-    margin: 5px 0;
-    text-align: left;
-    border-radius: 10%;
-}
-
 .certainty {
     color: #952B2B;
     font-weight: bold;
@@ -162,12 +153,17 @@ input[type="file"] {
 
 #type {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
+    color: #952B2B;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 5px 0;
+    text-align: left;
+    border-radius: 10%;
 }
 
 .corresponding-wines {
-    margin-left: 40px;
 }
 
 /*Certainty */
@@ -176,6 +172,7 @@ input[type="file"] {
     display: flex;
     flex-direction: row;
     align-items: center;
+    border-bottom: 1px solid #952B2B;
 }
 
 .percentage {

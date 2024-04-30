@@ -280,7 +280,7 @@ function showResults(imgElement, classes) {
   maxProbClassContainer.id = 'type';
 
   const maxProbClassElement = document.createElement('div');
-  maxProbClassElement.innerText = maxProbabilityClass.className;
+  maxProbClassElement.innerText = "Type " + maxProbabilityClass.className;
   maxProbClassContainer.appendChild(maxProbClassElement);
   console.log("Class name ", maxProbabilityClass.className)
 
@@ -332,7 +332,7 @@ function showResults(imgElement, classes) {
   // Create and append element for corresponding wines
   const winesElement = document.createElement('div');
   winesElement.className = 'corresponding-wines';
-  winesElement.innerText = correspondingWines;
+  winesElement.innerText = "Wine " + correspondingWines;
 
   maxProbClassContainer.appendChild(winesElement);
 
