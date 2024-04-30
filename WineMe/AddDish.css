@@ -133,7 +133,7 @@ input[type="file"] {
     background-color: #FFC2C2;
     border: 5px solid #952B2B;
     padding: 10px;
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -141,7 +141,15 @@ input[type="file"] {
     border-radius: 10%;
 }
 
-#type,
+#type {
+    color: #952B2B;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 5px 0;
+    text-align: left;
+    border-radius: 10%;
+}
+
 .certainty {
     color: #952B2B;
     font-weight: bold;
@@ -207,7 +215,7 @@ input[type="file"] {
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 60px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;

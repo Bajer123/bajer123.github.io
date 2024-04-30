@@ -125,6 +125,7 @@ body {
 /*Added wines */
 .wine-box {
     border: 1px solid #952B2B;
+    color: #952B2B;
     margin-top: 10px;
     padding: 5px;
     position: relative; 

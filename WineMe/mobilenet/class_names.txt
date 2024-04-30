@@ -1,3 +1,6 @@
-Red Wine	
-White Wine
-Rose Wine
+Red Dry
+Red Sweet	
+White Dry
+White Sweet
+Rose Dry
+Rose Sweet

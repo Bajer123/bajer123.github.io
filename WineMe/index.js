@@ -15,29 +15,45 @@
  * =============================================================================
  */
 
-let redWines = ["Merlot", "Sangiovese", "Zinfandel"];
-let whiteWines = ["Chardonnay", "Riesling", "Muscat"];
-let roseWines = ["Cabernet", "Syrah", "Provence"];
-let red = [];
-let white = [];
-let rose = [];
+let redDry = ["Cabernet Sauvignon", "Merlot", "Pinot Noir"];
+let redSweet = ["Port", "Lambrusco", "Brachetto d'Acqui"];
+let whiteDry = ["Sauvignon Blanc", "Chardonnay", "Pinot Grigio"];
+let whiteSweet = ["Riesling", "Moscato", "Gewürztraminer"];
+let roseDry = ["Provence Rosé", "White Merlot", "Rosado"];
+let roseSweet = ["White Zinfandel", "White Grenache", "Rosé d'Anjou"];
+
+let redAndDry = [];
+let redAndSweet = [];
+let whiteAndDry = [];
+let whiteAndSweet = [];
+let roseAndDry = [];
+let roseAndSweet = [];
 
 function loadWineRack() {
 
-  red = [];
-  white = [];
-  rose = [];
+  redAndDry = [];
+  redAndSweet = [];
+  whiteAndDry = [];
+  whiteAndSweet = [];
+  roseAndDry = [];
+  roseAndSweet = [];
   // Retrieve wines from local storage
   let storedWines = JSON.parse(localStorage.getItem('wines')) || [];
 
   // Match wines against red, white, and rose lists
   storedWines.forEach(wine => {
-    if (redWines.includes(wine)) {
-      red.push(wine);
-    } else if (whiteWines.includes(wine)) {
-      white.push(wine);
-    } else if (roseWines.includes(wine)) {
-      rose.push(wine);
+    if (redDry.includes(wine)) {
+      redAndDry.push(wine);
+    } else if (redSweet.includes(wine)) {
+      redAndSweet.push(wine);
+    } else if (whiteDry.includes(wine)) {
+      whiteAndDry.push(wine);
+    } else if (whiteSweet.includes(wine)) {
+      whiteAndSweet.push(wine);
+    } else if (roseDry.includes(wine)) {
+      roseAndDry.push(wine);
+    } else if (roseSweet.includes(wine)) {
+      roseAndSweet.push(wine);
     }
   });
 
@@ -223,9 +239,12 @@ export async function getTopKClasses(logits, topK) {
 function showResults(imgElement, classes) {
   loadWineRack();
   // Print the lists of red, white, and rose wines
-  console.log("Red Wines:", red.join(', '));
-  console.log("White Wines:", white.join(', '));
-  console.log("Rose Wines:", rose.join(', '));
+  console.log("Red Wines (Dry):", redAndDry.join(', '));
+  console.log("Red Wines (Sweet):", redAndSweet.join(', '));
+  console.log("White Wines (Dry):", whiteAndDry.join(', '));
+  console.log("White Wines (Sweet):", whiteAndSweet.join(', '));
+  console.log("Rose Wines (Dry):", roseAndDry.join(', '));
+  console.log("Rose Wines (Sweet):", roseAndSweet.join(', '));
 
   const predictionContainer = document.createElement('div');
   predictionContainer.className = 'pred-container';
@@ -263,27 +282,51 @@ function showResults(imgElement, classes) {
   const maxProbClassElement = document.createElement('div');
   maxProbClassElement.innerText = maxProbabilityClass.className;
   maxProbClassContainer.appendChild(maxProbClassElement);
+  console.log("Class name ", maxProbabilityClass.className)
 
 
   // Add corresponding wines based on the class
+  //Where the following recommendations are used
+  /*
+  If no "redAndDry" is available, recommending "whiteAndDry" as an alternative.
+  If no "redAndSweet" is available, recommending "whiteAndSweet" as an alternative.
+  If no "whiteAndDry" is available, recommending "redAndDry" as an alternative.
+  If no "whiteAndSweet" is available, recommending "redAndSweet" as an alternative.
+  If no "roseAndDry" is available, recommending "whiteAndDry" as an alternative.
+  If no "roseAndSweet" is available, recommending "whiteAndSweet" as an alternative.
+  */
   let correspondingWines;
-  if (maxProbabilityClass.className === 'Red Wine') {
-    correspondingWines = red.slice(0, 2).join(', ');
-    if (correspondingWines === '' && white.length > 0) {
-      correspondingWines = white.slice(0, 2).join(', ');
+  if (maxProbabilityClass.className === 'Red Dry') {
+    correspondingWines = redAndDry.slice(0, 2).join(', ');
+    if (correspondingWines === '' && redAndSweet.length > 0) {
+      correspondingWines = redAndSweet.slice(0, 2).join(', ');
     }
-  } else if (maxProbabilityClass.className === 'White Wine') {
-    correspondingWines = white.slice(0, 2).join(', ');
-    if (correspondingWines === '' && red.length > 0) {
-      correspondingWines = red.slice(0, 2).join(', ');
+  } else if (maxProbabilityClass.className === 'Red Sweet') {
+    correspondingWines = redAndSweet.slice(0, 2).join(', ');
+    if (correspondingWines === '' && redAndDry.length > 0) {
+      correspondingWines = redAndDry.slice(0, 2).join(', ');
     }
-  } else if (maxProbabilityClass.className === 'Rose') {
-    correspondingWines = rose.slice(0, 2).join(', ');
-    if (correspondingWines === '' && white.length > 0) {
-      correspondingWines = white.slice(0, 2).join(', ');
+  } else if (maxProbabilityClass.className === 'White Dry') {
+    correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+    if (correspondingWines === '' && whiteAndSweet.length > 0) {
+      correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+    }
+  } else if (maxProbabilityClass.className === 'White Sweet') {
+    correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+    if (correspondingWines === '' && whiteAndDry.length > 0) {
+      correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+    }
+  } else if (maxProbabilityClass.className === 'Rose Dry') {
+    correspondingWines = roseAndDry.slice(0, 2).join(', ');
+    if (correspondingWines === '' && roseAndSweet.length > 0) {
+      correspondingWines = roseAndSweet.slice(0, 2).join(', ');
+    }
+  } else if (maxProbabilityClass.className === 'Rose Sweet') {
+    correspondingWines = roseAndSweet.slice(0, 2).join(', ');
+    if (correspondingWines === '' && roseAndDry.length > 0) {
+      correspondingWines = roseAndDry.slice(0, 2).join(', ');
     }
   }
-
 
 
   // Create and append element for corresponding wines

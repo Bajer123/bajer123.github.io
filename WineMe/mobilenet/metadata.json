@@ -1,1 +1,1 @@
-{"tfjsVersion":"1.3.1","tmVersion":"2.4.7","packageVersion":"0.8.4-alpha2","packageName":"@teachablemachine/image","timeStamp":"2024-03-21T09:45:40.075Z","userMetadata":{},"modelName":"tm-my-image-model","labels":["RedWine","WhiteWine","Rose"],"imageSize":224}
+{"tfjsVersion":"1.3.1","tmVersion":"2.4.7","packageVersion":"0.8.4-alpha2","packageName":"@teachablemachine/image","timeStamp":"2024-04-30T08:51:18.045Z","userMetadata":{},"modelName":"tm-my-image-model","labels":["Red Dry","Red Sweet","White Dry","White Sweet","Rose Dry","Rose Sweet"],"imageSize":224}
