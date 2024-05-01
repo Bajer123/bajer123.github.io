@@ -136,6 +136,7 @@ if (homeButton) {
   });
 }
 
+// Buttons for home screen
 const WineRackButton = document.getElementById('navigateButtonWineRack');
 if (WineRackButton) {
   WineRackButton.addEventListener('click', function () {
@@ -154,6 +155,13 @@ const addButton = document.getElementById('navigateButtonAddDish');
 if (addButton) {
   addButton.addEventListener('click', function () {
     window.location.href = 'AddDish.html';
+  });
+}
+
+const explanationButton = document.getElementById('navigateExplanation');
+if (explanationButton) {
+  explanationButton.addEventListener('click', function () {
+    window.location.href = 'Explanation.html';
   });
 }
 
@@ -383,6 +391,8 @@ filesElement.addEventListener('change', evt => {
     const idx = i;
     // Closure to capture the file information.
     reader.onload = e => {
+      // Store the image data in localStorage
+      localStorage.setItem('uploadedImage', e.target.result);
       // Fill the image & call predict.
       let img = document.createElement('img');
       img.src = e.target.result;
