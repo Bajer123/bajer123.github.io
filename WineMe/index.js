@@ -157,6 +157,7 @@ if (addButton) {
   });
 }
 
+
 /**
  * Given an image element, makes a prediction through mobilenet returning the
  * probabilities of the top K classes.
@@ -172,6 +173,8 @@ async function predict(imgElement) {
   // The second start time excludes the extraction and preprocessing and
   // includes only the predict() call.
   let startTime2;
+
+
   const logits = tf.tidy(() => {
     // tf.browser.fromPixels() returns a Tensor from an image element.
     const img = tf.browser.fromPixels(imgElement).toFloat();
@@ -188,12 +191,15 @@ async function predict(imgElement) {
     return mobilenet.predict(batched);
   });
 
+
+
   // Convert logits to probabilities and class names.
   const classes = await getTopKClasses(logits, TOPK_PREDICTIONS);
   const totalTime1 = performance.now() - startTime1;
   const totalTime2 = performance.now() - startTime2;
   status(`Done in ${Math.floor(totalTime1)} ms ` +
     `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
+
 
   // Show the classes in the DOM.
   showResults(imgElement, classes);
@@ -231,6 +237,8 @@ export async function getTopKClasses(logits, topK) {
   }
   return topClassesAndProbs;
 }
+
+
 
 //
 // UI SHOW Certainly 
@@ -357,7 +365,9 @@ function showResults(imgElement, classes) {
 
   predictionsElement.insertBefore(
     predictionContainer, predictionsElement.firstChild);
+
 }
+
 
 
 const filesElement = document.getElementById('files');
