@@ -269,7 +269,7 @@ function showResults(imgElement, classes) {
   const imgContainer = document.createElement('div');
   imgContainer.id = 'picture';
   imgContainer.appendChild(imgElement);
-  predictionContainer.appendChild(imgContainer);
+  predictionContainer.appendChild(imgContainer)
 
   //Recommendation text before box
   const predictionText = document.createElement('p')
@@ -370,12 +370,12 @@ function showResults(imgElement, classes) {
   maxProbRow.appendChild(maxProbElement);
 
   predictionContainer.appendChild(maxProbRow);
+  predictionsElement.insertBefore(predictionContainer, predictionsElement.firstChild);
 
   predictionsElement.insertBefore(
     predictionContainer, predictionsElement.firstChild);
 
 }
-
 
 
 const filesElement = document.getElementById('files');
@@ -405,6 +405,8 @@ filesElement.addEventListener('change', evt => {
     reader.readAsDataURL(f);
   }
 });
+
+
 
 const demoStatusElement = document.getElementById('status');
 const status = msg => demoStatusElement.innerText = msg;
