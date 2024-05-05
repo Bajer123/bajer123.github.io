@@ -108,7 +108,7 @@ function onProgress(progress) {
 
 let mobilenet;
 const mobilenetDemo = async () => {
-  status('Loading model...');
+  //status('Loading model...');
 
   mobilenet = await tf.loadLayersModel(MOBILENET_MODEL_PATH);
 
@@ -116,9 +116,9 @@ const mobilenetDemo = async () => {
   // Warmup the model. This isn't necessary, but makes the first prediction
   // faster. Call `dispose` to release the WebGL memory allocated for the return
   // value of `predict`.
-  //mobilenet.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
+  mobilenet.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
 
-  status('');
+  //status('');
 
   // Make a prediction through the locally hosted cat.jpg.
   /**const catElement = document.getElementById('cat');
@@ -181,7 +181,7 @@ if (explanationButton) {
  * probabilities of the top K classes.
  */
 async function predict(imgElement) {
-  status('Predicting...');
+  //status('Predicting...');
 
   predictionsElement.innerHTML = '';
 
@@ -197,13 +197,13 @@ async function predict(imgElement) {
     .then(model => {
       // Model loaded successfully
       mobilenet = model;
-      status('');
+      //status('');
       document.getElementById('file-container').style.display = '';
     })
     .catch(error => {
       // Handle error
       console.error('Error loading model:', error);
-      status('Error loading model');
+      //status('Error loading model');
     });
 
   const logits = tf.tidy(() => {
@@ -226,8 +226,8 @@ async function predict(imgElement) {
   const classes = await getTopKClasses(logits, TOPK_PREDICTIONS);
   const totalTime1 = performance.now() - startTime1;
   const totalTime2 = performance.now() - startTime2;
-  status(`Done in ${Math.floor(totalTime1)} ms ` +
-    `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
+  //status(`Done in ${Math.floor(totalTime1)} ms ` +
+  //  `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
 
 
   // Show the classes in the DOM.
@@ -476,8 +476,8 @@ filesElement.addEventListener('change', evt => {
 
 
 
-const demoStatusElement = document.getElementById('status');
-const status = msg => demoStatusElement.innerText = msg;
+//const demoStatusElement = document.getElementById('status');
+//const status = msg => demoStatusElement.innerText = msg;
 
 const predictionsElement = document.getElementById('predictions');
 
