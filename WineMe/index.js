@@ -330,47 +330,62 @@ function showResults(imgElement, classes) {
   */
 
   let correspondingWines;
+  let recomWine;
+  
   if (maxProbabilityClass.className === 'Red Dry') {
     correspondingWines = redAndDry.slice(0, 2).join(', ');
+    recomWine = redAndDry[0];
     if (correspondingWines === '' && redAndSweet.length > 0) {
       correspondingWines = whiteAndDry.slice(0, 2).join(', ');
-      maxProbabilityClass.className = 'White Dry';    
+      recomWine = whiteAndDry[0];
+      maxProbabilityClass.className = 'White Dry';
     }
   } else if (maxProbabilityClass.className === 'Red Sweet') {
     correspondingWines = redAndSweet.slice(0, 2).join(', ');
+    recomWine = redAndSweet[0];
     if (correspondingWines === '' && redAndDry.length > 0) {
       correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+      recomWine = whiteAndSweet[0];
       maxProbabilityClass.className = 'White Sweet';
     }
   } else if (maxProbabilityClass.className === 'White Dry') {
     correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+    recomWine = whiteAndDry[0];
     if (correspondingWines === '' && whiteAndSweet.length > 0) {
       correspondingWines = redAndDry.slice(0, 2).join(', ');
+      recomWine = redAndDry[0];
       maxProbabilityClass.className = 'Red Dry';
     }
   } else if (maxProbabilityClass.className === 'White Sweet') {
     correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+    recomWine = whiteAndSweet[0];
     if (correspondingWines === '' && whiteAndDry.length > 0) {
       correspondingWines = redAndSweet.slice(0, 2).join(', ');
+      recomWine = redAndSweet[0];
       maxProbabilityClass.className = 'Red Sweet';
     }
   } else if (maxProbabilityClass.className === 'Rose Dry') {
     correspondingWines = roseAndDry.slice(0, 2).join(', ');
+    recomWine = roseAndDry[0];
     if (correspondingWines === '' && roseAndSweet.length > 0) {
       correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+      recomWine = whiteAndDry[0];
       maxProbabilityClass.className = 'White Dry';
     }
   } else if (maxProbabilityClass.className === 'Rose Sweet') {
     correspondingWines = roseAndSweet.slice(0, 2).join(', ');
+    recomWine = roseAndSweet[0];
     if (correspondingWines === '' && roseAndDry.length > 0) {
       correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+      recomWine = whiteAndSweet[0];
       maxProbabilityClass.className = 'White Sweet';
     }
   }
+  
 
   //Upload result to local storage
   localStorage.setItem('WineType', maxProbabilityClass.className);
-  localStorage.setItem('WineNames', correspondingWines);
+  localStorage.setItem('WineNames', recomWine);
 
   //Row for wine names
   const wineNames = document.createElement('div');
