@@ -1,5 +1,6 @@
 
-
+//Makes the AddDish page remember the results
+localStorage.setItem('cameFromExplanation', true);
 
 
 //Button back to add dish

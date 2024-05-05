@@ -63,6 +63,12 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
+const IMAGE_SIZE = 224;
+const TOPK_PREDICTIONS = 3;
+
+
+
+
 function drop(ev) {
   ev.preventDefault();
   console.log(ev);
@@ -95,8 +101,6 @@ const MOBILENET_MODEL_PATH = './mobilenet/model.json';
 // tslint:disable-next-line:max-line-length
 //'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
 
-const IMAGE_SIZE = 224;
-const TOPK_PREDICTIONS = 3;
 
 /* Progress used to loading bar */
 function onProgress(progress) {
@@ -224,8 +228,7 @@ async function predict(imgElement) {
 
   // Convert logits to probabilities and class names.
   const classes = await getTopKClasses(logits, TOPK_PREDICTIONS);
-  const totalTime1 = performance.now() - startTime1;
-  const totalTime2 = performance.now() - startTime2;
+  localStorage.setItem('classes', JSON.stringify(classes));
   //status(`Done in ${Math.floor(totalTime1)} ms ` +
   //  `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
 
@@ -284,6 +287,14 @@ function showResults(imgElement, classes) {
   console.log("Rose Wines (Dry):", roseAndDry.join(', '));
   console.log("Rose Wines (Sweet):", roseAndSweet.join(', '));
 
+  //unhide explanation button and text
+  let explanationButton = document.getElementById('navigateExplanation');
+  explanationButton.style.backgroundColor = '#952B2B';
+
+  let explanationText = document.getElementById('infoText');
+  explanationText.style.color = '#952B2B';
+  explanationText.style.borderBottom = '2px solid #952B2B';
+
   const predictionContainer = document.createElement('div');
   predictionContainer.className = 'pred-container';
 
@@ -331,7 +342,7 @@ function showResults(imgElement, classes) {
 
   let correspondingWines;
   let recomWine;
-  
+
   if (maxProbabilityClass.className === 'Red Dry') {
     correspondingWines = redAndDry.slice(0, 2).join(', ');
     recomWine = redAndDry[0];
@@ -381,7 +392,7 @@ function showResults(imgElement, classes) {
       maxProbabilityClass.className = 'White Sweet';
     }
   }
-  
+
 
   //Upload result to local storage
   localStorage.setItem('WineType', maxProbabilityClass.className);
@@ -390,8 +401,8 @@ function showResults(imgElement, classes) {
   //Row for wine names
   const wineNames = document.createElement('div');
   wineNames.id = "WineNames";
-  
- 
+
+
   //Create two div for "Wine " and wines names row
   const wineText = document.createElement('div');
   wineText.innerHTML = 'Wine';
@@ -442,12 +453,12 @@ function showResults(imgElement, classes) {
   probabilityPercentage.innerText = probability + "%";
 
   //Set the color of probability percentage bases on how sure
-  if (probability > 90 && probability<= 100){
+  if (probability > 90 && probability <= 100) {
     probabilityPercentage.style.color = 'green';
   }
-  else if (probability > 70 && probability<= 90){
+  else if (probability > 70 && probability <= 90) {
     probabilityPercentage.style.color = 'yellow';
-  }else {
+  } else {
     probabilityPercentage.style.color = 'red';
   }
 
@@ -503,5 +514,32 @@ const dropfieldElement = document.getElementById('foodImage');
 dropfieldElement.addEventListener("dragenter", allowDrop, false);
 dropfieldElement.addEventListener("dragover", allowDrop, false);
 dropfieldElement.addEventListener("drop", drop, false);
+
+//If the user came from the explanation page, load the previous results
+const cameFromExplanation = localStorage.getItem('cameFromExplanation');
+
+const classesString = localStorage.getItem('classes');
+let classes;
+try {
+  classes = JSON.parse(classesString); // Parse the JSON string back into an array
+} catch (error) {
+  console.error('Error parsing JSON:', error);
+}
+
+
+let uploadedImage = localStorage.getItem('uploadedImage');
+console.log("CAME FROOOOM ", cameFromExplanation);
+console.log("is it true ", cameFromExplanation == 'true');
+
+if (cameFromExplanation == 'true') {
+  localStorage.setItem('cameFromExplanation', false);
+  // Fill the image & call predict.
+  let img = document.createElement('img');
+  img.src = uploadedImage;
+  img.width = IMAGE_SIZE;
+  img.height = IMAGE_SIZE;
+  showResults(img, classes);
+}
+
 
 mobilenetDemo();
