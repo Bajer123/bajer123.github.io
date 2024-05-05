@@ -368,6 +368,10 @@ function showResults(imgElement, classes) {
     }
   }
 
+  //Upload result to local storage
+  localStorage.setItem('WineType', maxProbabilityClass.className);
+  localStorage.setItem('WineNames', correspondingWines);
+
   //Row for wine names
   const wineNames = document.createElement('div');
   wineNames.id = "WineNames";
@@ -407,7 +411,6 @@ function showResults(imgElement, classes) {
   maxProbClassElement.appendChild(typeWine);
   maxProbClassContainer.appendChild(maxProbClassElement)
   console.log("Class name ", maxProbabilityClass.className)
-
 
   //Certainty
   const maxProbElement = document.createElement('div');
