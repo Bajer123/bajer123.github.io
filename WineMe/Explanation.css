@@ -72,21 +72,56 @@ body {
     font-size: 20px;
 }
 
+/* exp top */
+#textTop {
+    color: #952B2B;
+    margin: 0px 30px 0px 30px;
+    padding-bottom: 20px;
+}
+
+/*Text above image */
+#heatMapExp {
+    color: #952B2B;
+    border-bottom: 2px solid #952B2B;
+    margin: 0px 30px 0px 30px;
+}
 
 /* Food image */
 #uploadedImageContainer {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+/* exp bottom*/
+#Results {
+    padding-bottom: 20px;
+}
+
+#names {
+    color: #952B2B;
+    border-bottom: 2px solid #952B2B;
+    margin: 0px 30px 0px 20px;
+}
+
+/*Bulletpoints */
+.bulletPoints {
+    color: #952B2B;
+    padding-left: 10px;
+}
+
+.bulletPoints ul li {
+    margin: 5px;
 }
 
 
 /* Home button */
 .home-button {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;

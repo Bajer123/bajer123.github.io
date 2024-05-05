@@ -219,13 +219,17 @@ input[type="file"] {
 /* Text */
 
 .informationDiv {
-    display: inline-flex;
-    flex-wrap: wrap;
+    display: flex;
     flex-direction: row;
-    align-content: center;
-    justify-content: center;
     align-items: center;
+    padding-bottom: 20px;
+}
 
+.informationDiv p {
+    color: #952B2B;
+    border-bottom: 2px solid #952B2B;
+    margin: 0px 30px 0px 30px;
+    left: 0px;
 }
 
 /* Button */
@@ -234,6 +238,7 @@ input[type="file"] {
     width: 30%;
     height: 30%;
     border-radius: 25%;
+    right: 30px;
 }
 
 #questionmark {

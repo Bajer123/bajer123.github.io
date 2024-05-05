@@ -58,100 +58,114 @@ function loadResults() {
   let bulletpointsContainer = document.createElement('div');
   bulletpointsContainer.className = "bulletPoints";
 
-  //Bulletpoint 1 - Sweetness
-  let bulletPoint1 = document.createElement('p');
+  // Create an unordered list element
+  let bulletList = document.createElement('ul');
+
+  // Bulletpoint 1 - Sweetness
+  let bulletPoint1 = document.createElement('li');
   bulletPoint1.innerHTML = getSweetness(wineType) + ' is good for ' + getFoodType(wineType);
-  bulletpointsContainer.appendChild(bulletPoint1);
+  bulletList.appendChild(bulletPoint1);
 
-  //Bulletpoint 2 - Notes 
-  let bulletPoint2 = document.createElement('p');
+  // Get notes and intensity
+  let notesAndIntensity = getNotesAndIntensity(wineNames);
+  let notes = notesAndIntensity.notes;
+  let intensity = notesAndIntensity.intensity;
 
+  // Bulletpoint 2 - Notes 
+  let bulletPoint2 = document.createElement('li');
+  bulletPoint2.innerHTML = "This wine has notes of " + notes;
+  bulletList.appendChild(bulletPoint2);
 
-  //BulletPoint 3 - Intensity
+  // BulletPoint 3 - Intensity
+  let bulletPoint3 = document.createElement('li');
+  bulletPoint3.innerHTML = "This wine's intensity is " + intensity;
+  bulletList.appendChild(bulletPoint3);
 
+  bulletpointsContainer.appendChild(bulletList);
   results.appendChild(bulletpointsContainer);
-}
 
-function getNotesAndIntensity(WineNames){
-//Dummy notes
-let notes;
-let intensity;
-//Red dry
-if(WineNames === "Cabernet Sauvignon"){
-  notes = 'oak';
-  intensity = 'strong';
-} else if(WineNames === "Merlot"){
-  notes = 'chocolate';
-  intensity = 'strong';
-} else if(WineNames === "Pinot Noir"){
-  notes = 'cherry';
-  intensity = 'light';
-} 
-//Red Sweet
-else if(WineNames === "Port"){
-  notes = 'oak';
-  intensity = 'strong';
-} else if(WineNames === "Lambrusco"){
-  notes = 'strawberry';
-  intensity = 'medium';
-} else if(WineNames === "Brachetto d'Acqui"){
-  notes = 'raspberry';
-  intensity = 'medium';
-}
-//White dry
-else if (WineNames === "Sauvignon Blanc"){
-  notes = "citrus";
-  intensity = 'light-medium';
-} else if(WineNames === "Chardonnay"){
-  notes = 'oak'; 
-  intensity = 'medium-strong';
-} else if(WineNames === "Pinot Grigio"){
-  notes = 'peach';
-  intensity = 'medium';
-}
-//White sweet
-else if(WineNames === "Riesling"){
-  notes = 'peach';
-  intensity = 'medium-strong';
-} else if(WineNames === "Moscato"){
-  notes = 'pear';
-  intensity = 'light-medium';  
-} else if(WineNames === "Gewürztraminer"){
-  notes = 'peach';
-  intensity = 'medium-strong';
-}
-//Rose Dry
-else if(WineNames === "Provence Rosé"){
-  notes = 'strawberry';
-  intensity = 'medium';  
-}else if(WineNames === "White Merlot"){
-  notes = 'raspberry';
-  intensity = 'medium';  
-}else if(WineNames === "Rosado"){
-  notes = 'strawberry';
-  intensity = 'medium';
-}
-//Rose Sweet
-else if(WineNames === "White Zinfandel"){
-  notes = 'strawberry';
-  intensity = 'medium';
-} else if(WineNames === "White Grenache"){
-  notes = 'raspberry';
-  intensity = 'medium';  
-} else if(WineNames === "Rosé d'Anjou"){
-  notes = 'strawberry';
-  intensity = 'light'; 
 }
 
 
+function getNotesAndIntensity(WineNames) {
+  //Dummy notes
+  let notes;
+  let intensity;
 
-return notes, intensity;
+  //Red dry
+  if (WineNames === "Cabernet Sauvignon") {
+    notes = 'oak';
+    intensity = 'strong';
+  } else if (WineNames === "Merlot") {
+    notes = 'chocolate';
+    intensity = 'strong';
+  } else if (WineNames === "Pinot Noir") {
+    notes = 'cherry';
+    intensity = 'light';
+  }
+  //Red Sweet
+  else if (WineNames === "Port") {
+    notes = 'oak';
+    intensity = 'strong';
+  } else if (WineNames === "Lambrusco") {
+    notes = 'strawberry';
+    intensity = 'medium';
+  } else if (WineNames === "Brachetto d'Acqui") {
+    notes = 'raspberry';
+    intensity = 'medium';
+  }
+  //White dry
+  else if (WineNames === "Sauvignon Blanc") {
+    notes = "citrus";
+    intensity = 'light-medium';
+  } else if (WineNames === "Chardonnay") {
+    notes = 'oak';
+    intensity = 'medium-strong';
+  } else if (WineNames === "Pinot Grigio") {
+    notes = 'peach';
+    intensity = 'medium';
+  }
+  //White sweet
+  else if (WineNames === "Riesling") {
+    notes = 'peach';
+    intensity = 'medium-strong';
+  } else if (WineNames === "Moscato") {
+    notes = 'pear';
+    intensity = 'light-medium';
+  } else if (WineNames === "Gewürztraminer") {
+    notes = 'peach';
+    intensity = 'medium-strong';
+  }
+  //Rose Dry
+  else if (WineNames === "Provence Rosé") {
+    notes = 'strawberry';
+    intensity = 'medium';
+  } else if (WineNames === "White Merlot") {
+    notes = 'raspberry';
+    intensity = 'medium';
+  } else if (WineNames === "Rosado") {
+    notes = 'strawberry';
+    intensity = 'medium';
+  }
+  //Rose Sweet
+  else if (WineNames === "White Zinfandel") {
+    notes = 'strawberry';
+    intensity = 'medium';
+  } else if (WineNames === "White Grenache") {
+    notes = 'raspberry';
+    intensity = 'medium';
+  } else if (WineNames === "Rosé d'Anjou") {
+    notes = 'strawberry';
+    intensity = 'light';
+  }
+
+  return { notes: notes, intensity: intensity };
 }
 
-function getSweetness(wineType){
+function getSweetness(wineType) {
   let res = wineType.charAt(wineType.length - 1);
 
-  if(res === 'y'){
+  if (res === 'y') {
     return 'Dryness';
   }
   return 'Sweetness';
