@@ -98,11 +98,20 @@ const MOBILENET_MODEL_PATH = './mobilenet/model.json';
 const IMAGE_SIZE = 224;
 const TOPK_PREDICTIONS = 3;
 
+/* Progress used to loading bar */
+function onProgress(progress) {
+  const progressBar = document.getElementById('progress-bar');
+  progressBar.style.width = `${progress * 100}%`;
+}
+
+
+
 let mobilenet;
 const mobilenetDemo = async () => {
   status('Loading model...');
 
   mobilenet = await tf.loadLayersModel(MOBILENET_MODEL_PATH);
+
 
   // Warmup the model. This isn't necessary, but makes the first prediction
   // faster. Call `dispose` to release the WebGL memory allocated for the return
@@ -166,6 +175,7 @@ if (explanationButton) {
 }
 
 
+
 /**
  * Given an image element, makes a prediction through mobilenet returning the
  * probabilities of the top K classes.
@@ -182,6 +192,19 @@ async function predict(imgElement) {
   // includes only the predict() call.
   let startTime2;
 
+  // Load the model with onProgress callback
+  tf.loadLayersModel(MOBILENET_MODEL_PATH, { onProgress })
+    .then(model => {
+      // Model loaded successfully
+      mobilenet = model;
+      status('');
+      document.getElementById('file-container').style.display = '';
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error loading model:', error);
+      status('Error loading model');
+    });
 
   const logits = tf.tidy(() => {
     // tf.browser.fromPixels() returns a Tensor from an image element.
@@ -198,8 +221,6 @@ async function predict(imgElement) {
     // Make a prediction through mobilenet.
     return mobilenet.predict(batched);
   });
-
-
 
   // Convert logits to probabilities and class names.
   const classes = await getTopKClasses(logits, TOPK_PREDICTIONS);
@@ -253,6 +274,7 @@ export async function getTopKClasses(logits, topK) {
 //
 
 function showResults(imgElement, classes) {
+
   loadWineRack();
   // Print the lists of red, white, and rose wines
   console.log("Red Wines (Dry):", redAndDry.join(', '));
@@ -295,11 +317,6 @@ function showResults(imgElement, classes) {
   maxProbClassContainer.className = 'cell';
   maxProbClassContainer.id = 'type';
 
-  const maxProbClassElement = document.createElement('div');
-  maxProbClassElement.innerText = "Type " + maxProbabilityClass.className;
-  maxProbClassContainer.appendChild(maxProbClassElement);
-  console.log("Class name ", maxProbabilityClass.className)
-
 
   // Add corresponding wines based on the class
   //Where the following recommendations are used
@@ -311,48 +328,86 @@ function showResults(imgElement, classes) {
   If no "roseAndDry" is available, recommending "whiteAndDry" as an alternative.
   If no "roseAndSweet" is available, recommending "whiteAndSweet" as an alternative.
   */
+
   let correspondingWines;
   if (maxProbabilityClass.className === 'Red Dry') {
     correspondingWines = redAndDry.slice(0, 2).join(', ');
     if (correspondingWines === '' && redAndSweet.length > 0) {
-      correspondingWines = redAndSweet.slice(0, 2).join(', ');
+      correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+      maxProbabilityClass.className = 'White Dry';    
     }
   } else if (maxProbabilityClass.className === 'Red Sweet') {
     correspondingWines = redAndSweet.slice(0, 2).join(', ');
     if (correspondingWines === '' && redAndDry.length > 0) {
-      correspondingWines = redAndDry.slice(0, 2).join(', ');
+      correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+      maxProbabilityClass.className = 'White Sweet';
     }
   } else if (maxProbabilityClass.className === 'White Dry') {
     correspondingWines = whiteAndDry.slice(0, 2).join(', ');
     if (correspondingWines === '' && whiteAndSweet.length > 0) {
-      correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+      correspondingWines = redAndDry.slice(0, 2).join(', ');
+      maxProbabilityClass.className = 'Red Dry';
     }
   } else if (maxProbabilityClass.className === 'White Sweet') {
     correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
     if (correspondingWines === '' && whiteAndDry.length > 0) {
-      correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+      correspondingWines = redAndSweet.slice(0, 2).join(', ');
+      maxProbabilityClass.className = 'Red Sweet';
     }
   } else if (maxProbabilityClass.className === 'Rose Dry') {
     correspondingWines = roseAndDry.slice(0, 2).join(', ');
     if (correspondingWines === '' && roseAndSweet.length > 0) {
-      correspondingWines = roseAndSweet.slice(0, 2).join(', ');
+      correspondingWines = whiteAndDry.slice(0, 2).join(', ');
+      maxProbabilityClass.className = 'White Dry';
     }
   } else if (maxProbabilityClass.className === 'Rose Sweet') {
     correspondingWines = roseAndSweet.slice(0, 2).join(', ');
     if (correspondingWines === '' && roseAndDry.length > 0) {
-      correspondingWines = roseAndDry.slice(0, 2).join(', ');
+      correspondingWines = whiteAndSweet.slice(0, 2).join(', ');
+      maxProbabilityClass.className = 'White Sweet';
     }
   }
 
+  //Row for wine names
+  const wineNames = document.createElement('div');
+  wineNames.id = "WineNames";
+  
+ 
+  //Create two div for "Wine " and wines names row
+  const wineText = document.createElement('div');
+  wineText.innerHTML = 'Wine';
+  wineText.id = "WineText";
+  wineNames.appendChild(wineText);
 
   // Create and append element for corresponding wines
-  const winesElement = document.createElement('div');
+  const winesElement = document.createElement('p');
   winesElement.className = 'corresponding-wines';
-  winesElement.innerText = "Wine " + correspondingWines;
+  winesElement.innerText = correspondingWines;
 
-  maxProbClassContainer.appendChild(winesElement);
+  wineNames.appendChild(winesElement);
+
+  maxProbClassContainer.appendChild(wineNames)
 
   maxProbRow.appendChild(maxProbClassContainer);
+
+  //Row for the type of wine
+  const maxProbClassElement = document.createElement('div');
+  maxProbClassElement.id = "WineType";
+
+  //Wine Type text 
+  const typeText = document.createElement('div');
+  typeText.innerHTML = 'Type';
+  typeText.id = 'TypeText';
+  maxProbClassElement.appendChild(typeText);
+
+  //Type of wine based on model
+  const typeWine = document.createElement('p');
+  typeWine.innerText = maxProbabilityClass.className;
+  typeWine.className = "WineTypeName";
+  maxProbClassElement.appendChild(typeWine);
+  maxProbClassContainer.appendChild(maxProbClassElement)
+  console.log("Class name ", maxProbabilityClass.className)
+
 
   //Certainty
   const maxProbElement = document.createElement('div');
@@ -365,7 +420,20 @@ function showResults(imgElement, classes) {
   // Probability percentage
   const probabilityPercentage = document.createElement('div');
   probabilityPercentage.className = 'percentage';
-  probabilityPercentage.innerText = (maxProbabilityClass.probability * 100).toFixed(2) + "%";
+  const probability = (maxProbabilityClass.probability * 100).toFixed(2);
+  probabilityPercentage.innerText = probability + "%";
+
+  //Set the color of probability percentage bases on how sure
+  if (probability > 90 && probability<= 100){
+    probabilityPercentage.style.color = 'green';
+  }
+  else if (probability > 70 && probability<= 90){
+    probabilityPercentage.style.color = 'yellow';
+  }else {
+    probabilityPercentage.style.color = 'red';
+  }
+
+
   maxProbElement.appendChild(probabilityPercentage);
   maxProbRow.appendChild(maxProbElement);
 

@@ -117,16 +117,17 @@ input[type="file"] {
 
 
 /*Loading bar */
-#loading-bar-container {
-    height: 4px;
+#progress-bar-container {
+    width: 100%;
+    height: 20px;
     background-color: #f0f0f0;
-    margin: 20px;
+    margin-bottom: 10px;
   }
   
-  #loading-bar {
+  #progress-bar {
     height: 100%;
     background-color: #4caf50;
-    width: 0%;
+    width: 0;
     transition: width 0.3s ease;
   }
   
@@ -166,32 +167,52 @@ input[type="file"] {
     border-radius: 10%;
 }
 
-/*Types of wines */
+/*Wine names row */
+#WineNames, #WineType {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+/*Type and name of wines */
 
 #type {
-    display: flex;
-    flex-direction: column;
+    display: inline grid;
+    gap: 10px;
     align-items: left;
     color: #952B2B;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
     margin: 5px 0;
     text-align: left;
     border-radius: 10%;
+    font-weight: bold;
+}
+
+
+#TypeText, #WineText {
+    font-size: 16px;
+    border: 5px solid #952B2B;
+    border-radius: 5px;
+    background-color: #952B2B;
+    color: #FFC2C2;
+}
+
+.WineTypeName, .corresponding-wines {
+    border-bottom: 2px solid #952B2B;
+    margin: 0px 0px 10px 0px;
 }
 
 /*Certainty */
 
 .certainty {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 150px;
     align-items: center;
-    border-bottom: 1px solid #952B2B;
+    border-bottom: 2px solid #952B2B;
 }
 
-.percentage {
-    margin-left:40px;
-}
 
 /* More information button */
 
