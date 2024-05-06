@@ -309,6 +309,9 @@ function showResults(imgElement, classes) {
 
 
 
+  const recomContainer = document.createElement('div');
+  recomContainer.className = 'recom';
+
   //Recommendation text before box
   const predictionText = document.createElement('p');
   predictionText.className = 'predText';
@@ -325,8 +328,10 @@ function showResults(imgElement, classes) {
     findAnotherWine(currentWineType);
   });
 
-  predictionText.appendChild(newWineButton);
-  predictionContainer.appendChild(predictionText);
+  recomContainer.appendChild(predictionText);
+  recomContainer.appendChild(newWineButton);
+
+  predictionContainer.appendChild(recomContainer);
 
 
   // Find the class with the highest probability
@@ -571,7 +576,7 @@ if (cameFromExplanation == 'true') {
 
 
 function findAnotherWine(WineType) {
-  
+
   let correspondingWines;
   let recomWine;
 

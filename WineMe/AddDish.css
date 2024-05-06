@@ -132,7 +132,11 @@ input[type="file"] {
     transition: width 0.3s ease;
 }
 
-
+/* Recom top container */
+.recom {
+    display: flex;
+    gap: 60px;
+}
 
 /*Text above recommendation box */
 .predText {
@@ -142,7 +146,17 @@ input[type="file"] {
     text-align: left;
     font-family: 'Times New Roman', serif;
     border-bottom: 2px solid #952B2B;
-    margin: 0px 30px 10px 30px;
+    margin: 10px 30px 10px 30px;
+}
+
+/* Another Wine Button */
+#newWine {
+    all: unset;
+    background: #952B2B;
+    color: #FFC2C2;
+    border-radius: 10px;
+    border: 8px solid #952B2B;
+    margin-bottom: 10px;
 }
 
 
