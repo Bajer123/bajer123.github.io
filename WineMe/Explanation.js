@@ -43,10 +43,12 @@ function loadResults() {
 
   //Text above image 
   let expTop = document.getElementById("explanationTop");
-  let textTop = document.createElement("p");
+  let textTop = document.createElement('ul');
   textTop.id = 'textTop';
+  let textTopLi = document.createElement('li');
   let imgType = getFoodType(wineType);
-  textTop.innerHTML = 'A ' + wineType + ' is recommended because ' + imgType + ' was identified';
+  textTopLi.innerHTML = 'A ' + wineType + ' is recommended because ' + imgType + ' was identified';
+  textTop.appendChild(textTopLi);
   expTop.appendChild(textTop);
 
   //Names and more info
