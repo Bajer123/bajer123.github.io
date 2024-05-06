@@ -29,6 +29,8 @@ let whiteAndSweet = [];
 let roseAndDry = [];
 let roseAndSweet = [];
 
+let currentWineType;
+
 function loadWineRack() {
 
   redAndDry = [];
@@ -178,6 +180,41 @@ if (explanationButton) {
   });
 }
 
+//Another wine button 
+const anotherWine = document.getElementById('newWine');
+if (anotherWine) {
+  anotherWine.addEventListener('click', function () {
+    findAnotherWine(currentWineType);
+  });
+}
+
+
+function findAnotherWine(WineType, certainty) {
+  /*
+  If no "redAndDry" is available, recommending "whiteAndDry" as an alternative.
+  If no "redAndSweet" is available, recommending "whiteAndSweet" as an alternative.
+  If no "whiteAndDry" is available, recommending "redAndDry" as an alternative.
+  If no "whiteAndSweet" is available, recommending "redAndSweet" as an alternative.
+  If no "roseAndDry" is available, recommending "whiteAndDry" as an alternative.
+  If no "roseAndSweet" is available, recommending "whiteAndSweet" as an alternative.
+  */
+
+  if (WineType === 'Red Dry') {
+    WineType = 'White Dry';
+  } else if (WineType === 'White Dry') {
+    WineType = 'Red Dry';
+  } else if (WineType === 'White Sweet') {
+    WineType = 'Red Sweet';
+  } else if (WineType === 'Rose Dry') {
+    WineType = 'White Dry';
+  } else if (WineType === 'Rose Sweet') {
+    WineType = 'White Sweet';
+  }
+
+  showResults(img, WineType);
+
+}
+
 
 
 /**
@@ -305,10 +342,17 @@ function showResults(imgElement, classes) {
   predictionContainer.appendChild(imgContainer)
 
   //Recommendation text before box
-  const predictionText = document.createElement('p')
-  predictionText.className = 'predText'
-  predictionText.innerText = 'Recommendation'
-  predictionContainer.appendChild(predictionText)
+  const predictionText = document.createElement('p');
+  predictionText.className = 'predText';
+  predictionText.innerText = 'Recommendation';
+
+  // Create the button
+  const newWineButton = document.createElement('button');
+  newWineButton.id = 'newWine';
+  newWineButton.innerHTML = 'Another Wine';
+
+  predictionText.appendChild(newWineButton);
+  predictionContainer.appendChild(predictionText);
 
   // Find the class with the highest probability
   let maxProbabilityClass = classes[0];
@@ -398,6 +442,11 @@ function showResults(imgElement, classes) {
   localStorage.setItem('WineType', maxProbabilityClass.className);
   localStorage.setItem('WineNames', recomWine);
 
+  //For another wine button
+  currentWineType = maxProbabilityClass.className;
+
+  const probability = (maxProbabilityClass.probability * 100).toFixed(2);
+
   //Row for wine names
   const wineNames = document.createElement('div');
   wineNames.id = "WineNames";
@@ -449,7 +498,6 @@ function showResults(imgElement, classes) {
   // Probability percentage
   const probabilityPercentage = document.createElement('div');
   probabilityPercentage.className = 'percentage';
-  const probability = (maxProbabilityClass.probability * 100).toFixed(2);
   probabilityPercentage.innerText = probability + "%";
 
   //Set the color of probability percentage bases on how sure
@@ -471,6 +519,92 @@ function showResults(imgElement, classes) {
 
   predictionsElement.insertBefore(
     predictionContainer, predictionsElement.firstChild);
+
+}
+
+function createRecom(wineType, correspondingWines, certainty){
+
+    //Make recommendation box
+    const maxProbRow = document.createElement('div');
+    maxProbRow.id = 'recomendation';
+    maxProbRow.className = 'row';
+  
+    // Type of wine based on probability 
+    const maxProbClassContainer = document.createElement('div');
+    maxProbClassContainer.className = 'cell';
+    maxProbClassContainer.id = 'type';
+    //Row for wine names
+    const wineNames = document.createElement('div');
+    wineNames.id = "WineNames";
+  
+  
+    //Create two div for "Wine " and wines names row
+    const wineText = document.createElement('div');
+    wineText.innerHTML = 'Wine';
+    wineText.id = "WineText";
+    wineNames.appendChild(wineText);
+  
+    // Create and append element for corresponding wines
+    const winesElement = document.createElement('p');
+    winesElement.className = 'corresponding-wines';
+    winesElement.innerText = correspondingWines;
+  
+    wineNames.appendChild(winesElement);
+  
+    maxProbClassContainer.appendChild(wineNames)
+  
+    maxProbRow.appendChild(maxProbClassContainer);
+  
+    //Row for the type of wine
+    const maxProbClassElement = document.createElement('div');
+    maxProbClassElement.id = "WineType";
+  
+    //Wine Type text 
+    const typeText = document.createElement('div');
+    typeText.innerHTML = 'Type';
+    typeText.id = 'TypeText';
+    maxProbClassElement.appendChild(typeText);
+  
+    //Type of wine based on model
+    const typeWine = document.createElement('p');
+    typeWine.innerText = wineType;
+    typeWine.className = "WineTypeName";
+    maxProbClassElement.appendChild(typeWine);
+    maxProbClassContainer.appendChild(maxProbClassElement)
+  
+    //Certainty
+    const maxProbElement = document.createElement('div');
+    maxProbElement.className = 'certainty';
+    // Certainty text
+    const certaintyText = document.createElement('div');
+    certaintyText.innerText = 'Certainty ';
+    maxProbElement.appendChild(certaintyText);
+  
+    // Probability percentage
+    const probabilityPercentage = document.createElement('div');
+    probabilityPercentage.className = 'percentage';
+    const probability = certainty;
+    probabilityPercentage.innerText = probability + "%";
+  
+    //Set the color of probability percentage bases on how sure
+    if (probability > 90 && probability <= 100) {
+      probabilityPercentage.style.color = 'green';
+    }
+    else if (probability > 70 && probability <= 90) {
+      probabilityPercentage.style.color = 'yellow';
+    } else {
+      probabilityPercentage.style.color = 'red';
+    }
+  
+  
+    maxProbElement.appendChild(probabilityPercentage);
+    maxProbRow.appendChild(maxProbElement);
+  
+    predictionContainer.appendChild(maxProbRow);
+    predictionsElement.insertBefore(predictionContainer, predictionsElement.firstChild);
+  
+    predictionsElement.insertBefore(
+      predictionContainer, predictionsElement.firstChild);
 
 }
 
