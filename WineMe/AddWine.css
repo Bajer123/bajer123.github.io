@@ -142,13 +142,14 @@ body {
 
 /* Home button */
 .home-button {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
-    bottom: 60px;
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 100%; 
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding-top: 30px;
 }
 
 .delete-button {
